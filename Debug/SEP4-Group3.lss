@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00002064  00000000  00000000  000196b8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000361c  00000000  00000000  0001b71c  2**0
+ 10 .debug_str    00003651  00000000  00000000  0001b71c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000a8af  00000000  00000000  0001ed38  2**0
+ 11 .debug_loc    0000a8af  00000000  00000000  0001ed6d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000858  00000000  00000000  000295e7  2**0
+ 12 .debug_ranges 00000858  00000000  00000000  0002961c  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -10634,8 +10634,8 @@ int main(void)
     4abe:	30 91 03 02 	lds	r19, 0x0203	; 0x800203 <__malloc_heap_start+0x1>
     4ac2:	30 93 50 16 	sts	0x1650, r19	; 0x801650 <__brkval+0x1>
     4ac6:	20 93 4f 16 	sts	0x164F, r18	; 0x80164f <__brkval>
-    4aca:	20 91 00 02 	lds	r18, 0x0200	; 0x800200 <__data_start>
-    4ace:	30 91 01 02 	lds	r19, 0x0201	; 0x800201 <__data_start+0x1>
+    4aca:	20 91 00 02 	lds	r18, 0x0200	; 0x800200 <__DATA_REGION_ORIGIN__>
+    4ace:	30 91 01 02 	lds	r19, 0x0201	; 0x800201 <__DATA_REGION_ORIGIN__+0x1>
     4ad2:	21 15       	cp	r18, r1
     4ad4:	31 05       	cpc	r19, r1
     4ad6:	41 f4       	brne	.+16     	; 0x4ae8 <malloc+0xea>
