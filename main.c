@@ -1,28 +1,19 @@
-/*
-* main.c
-* Author : IHA
-*
-* Example main file including LoRaWAN setup
-* Just for inspiration :)
-*/
-
 #include <stdio.h>
 #include <avr/io.h>
-
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
-
 #include <stdio_driver.h>
 #include <serial.h>
-
- // Needed for LoRaWAN
 #include <lora_driver.h>
 #include <status_leds.h>
+#include "../Source/headers/TempHumid.h"
+#include "../Source/headers/co2.h"
 
-// define two Tasks
-void task1( void *pvParameters );
-void task2( void *pvParameters );
+
+//define sensor data
+float temperature = 0.0;
+float humidity = 0.0;
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
@@ -46,38 +37,22 @@ void create_tasks_and_semaphores(void)
 	}
 
 	xTaskCreate(
-	task1
-	,  "Task1"  // A name just for humans
+	TempHumid_getDataFromSensorTask
+	,  "TempHumid_getDataFromSensorTask"  // A name just for humans
 	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
 	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 
 	xTaskCreate(
-	task2
-	,  "Task2"  // A name just for humans
+	Co2_getDataFromSensorTask
+	,  "Co2_getDataFromSensorTask"  // A name just for humans
 	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
 	,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
 
-/*-----------------------------------------------------------*/
-void task1( void *pvParameters )
-{
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = 500/portTICK_PERIOD_MS; // 500 ms
-
-	// Initialise the xLastWakeTime variable with the current time.
-	xLastWakeTime = xTaskGetTickCount();
-
-	for(;;)
-	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		puts("Task1"); // stdio functions are not reentrant - Should normally be protected by MUTEX
-		PORTA ^= _BV(PA0);
-	}
-}
 
 /*-----------------------------------------------------------*/
 void task2( void *pvParameters )
@@ -101,6 +76,8 @@ void initialiseSystem()
 {
 	// Set output ports for leds used in the example
 	DDRA |= _BV(DDA0) | _BV(DDA7);
+	
+	TempHum_init();
 
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);

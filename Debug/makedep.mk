@@ -24,6 +24,10 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
+Source\tasks\co2.c
+
+Source\tasks\tempHumid.c
+
 LoRaWANHandler.c
 
 main.c

@@ -286,10 +286,16 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Source\headers\datashare.c">
+    <Compile Include="Source\headers\co2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\headers\data.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\headers\tempHumid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\co2.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\tasks\tempHumid.c">

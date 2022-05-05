@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <hih8120.h>
 #include "../headers/tempHumid.h"
-#include "../headers/DataShare.h"
+#include "../headers/data.h"
 
 TickType_t xLastWakeTime;
 TickType_t xFrequency;
