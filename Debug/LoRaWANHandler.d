@@ -22,7 +22,9 @@ LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
  ../FreeRTOS/src/list.h ../drivers/lora_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
- ../drivers/serial.h ../drivers/status_leds.h
+ ../drivers/serial.h ../drivers/status_leds.h \
+ ../drivers/../Source/headers/data.h ../FreeRTOS/src/semphr.h \
+ ../FreeRTOS/src/queue.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
@@ -85,3 +87,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/serial.h:
 
 ../drivers/status_leds.h:
+
+../drivers/../Source/headers/data.h:
+
+../FreeRTOS/src/semphr.h:
+
+../FreeRTOS/src/queue.h:

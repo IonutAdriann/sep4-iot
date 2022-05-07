@@ -7,13 +7,14 @@
 #include <serial.h>
 #include <lora_driver.h>
 #include <status_leds.h>
-#include "../Source/headers/TempHumid.h"
+#include "../Source/headers/tempHumid.h"
 #include "../Source/headers/co2.h"
 
 
 //define sensor data
 float temperature = 0.0;
 float humidity = 0.0;
+float ppm = 0.0;
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
@@ -49,7 +50,7 @@ void create_tasks_and_semaphores(void)
 	,  "Co2_getDataFromSensorTask"  // A name just for humans
 	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
-	,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
 
@@ -78,6 +79,8 @@ void initialiseSystem()
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 	
 	TempHum_init();
+	
+	Co2_init();
 
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);

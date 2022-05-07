@@ -7,10 +7,12 @@
 #include <stddef.h>
 #include <stdio.h>
 
+
 #include <ATMEGA_FreeRTOS.h>
 
 #include <lora_driver.h>
 #include <status_leds.h>
+#include "../Source/headers/data.h"
 
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "1AB7F2972CC78C9A"
@@ -63,7 +65,7 @@ static void _lora_setup(void)
 	printf("Set Receiver Delay: %d ms >%s<\n", 500, lora_driver_mapReturnCodeToText(lora_driver_setReceiveDelay(500)));
 
 	// Join the LoRaWAN
-	uint8_t maxJoinTriesLeft = 10;
+	uint8_t maxJoinTriesLeft = 1000;
 	
 	do {
 		rc = lora_driver_join(LORA_OTAA);
@@ -130,9 +132,11 @@ void lora_handler_task( void *pvParameters )
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
 		// Some dummy payload
-		uint16_t hum = 12345; // Dummy humidity
-		int16_t temp = 675; // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
+		uint16_t hum = humidity; // Dummy humidity
+		int16_t temp = temperature; // Dummy temp
+		uint16_t co2_ppm = ppm; // Dummy CO2
+		
+		printf("Data sent %f - %f - %f", humidity, temperature, ppm);
 
 		_uplink_payload.bytes[0] = hum >> 8;
 		_uplink_payload.bytes[1] = hum & 0xFF;

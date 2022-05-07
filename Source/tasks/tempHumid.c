@@ -19,7 +19,7 @@ void TempHumid_taskRun(void)
 	
 	if (HIH8120_OK != hih8120_wakeup())
 	{
-		vTaskDelay(pdMS_TO_TICKS(100))
+		vTaskDelay(pdMS_TO_TICKS(100));
 		printf("Temperature&humidity sensor didn't wake up retrying");
 		while (HIH8120_OK != hih8120_wakeup())
 		{

@@ -9,15 +9,8 @@
 #ifndef data_h
 #define data_h
 
-typedef struct SensorsData
-{
-uint16_t temperature;
-uint16_t humidity;
-uint16_t ppm;
-
-} SensorsData;
-
-
-SemaphoreHandle_t semaphore;
+extern float temperature;
+extern float humidity;
+extern float ppm;
 
 #endif

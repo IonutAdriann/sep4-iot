@@ -11,5 +11,5 @@
 
 
  void Co2_taskRun(void);
- void Co2_getDataFromSensorTask(void *pvParameters)
+ void Co2_getDataFromSensorTask(void *pvParameters);
  void Co2_init();

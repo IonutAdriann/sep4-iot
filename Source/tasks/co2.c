@@ -17,23 +17,23 @@
  
  void Co2_init()
  {
- mh_z19_initialise(ser_USART3);
+	mh_z19_initialise(ser_USART3);
  }
  
  void Co2_taskRun(void)
  {
- xTaskDelayUntil( &xLastWakeTime, xFrequency);
+	xTaskDelayUntil( &xLastWakeTime, xFrequency);
  
- mh_z19_returnCode_t rc;
+	mh_z19_returnCode_t rc;
  
- rc = mh_z19_takeMeassuring();
+	rc = mh_z19_takeMeassuring();
  
- vTaskDelay(pdMS_TO_TICKS(1200));
- if (rc != MHZ19_OK)
- {
- printf("das ist kaput, scheisse");
- }
- mh_z19_getCo2Ppm(&ppm);
+	vTaskDelay(pdMS_TO_TICKS(1200));
+	if (rc != MHZ19_OK)
+	{
+		printf("das ist kaput, scheisse");
+	}
+	mh_z19_getCo2Ppm(&ppm);
  
  }
  
