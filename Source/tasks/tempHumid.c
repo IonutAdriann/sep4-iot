@@ -33,7 +33,7 @@ void TempHumid_taskRun(void)
 	humidity = hih8120_getHumidity();
 }
 
-void TempHum_init()
+void TempHumid_init()
 {
 	if (HIH8120_OK == hih8120_initialise())
 	{

@@ -9,8 +9,8 @@
 #ifndef data_h
 #define data_h
 
-extern float temperature;
-extern float humidity;
-extern float ppm;
+extern uint16_t temperature;
+extern uint16_t humidity;
+extern uint16_t ppm;
 
 #endif

@@ -65,7 +65,7 @@ static void _lora_setup(void)
 	printf("Set Receiver Delay: %d ms >%s<\n", 500, lora_driver_mapReturnCodeToText(lora_driver_setReceiveDelay(500)));
 
 	// Join the LoRaWAN
-	uint8_t maxJoinTriesLeft = 1000;
+	uint8_t maxJoinTriesLeft = 100;
 	
 	do {
 		rc = lora_driver_join(LORA_OTAA);
@@ -124,7 +124,7 @@ void lora_handler_task( void *pvParameters )
 	_uplink_payload.portNo = 2;
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(30000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
 	for(;;)
@@ -133,10 +133,10 @@ void lora_handler_task( void *pvParameters )
 
 		// Some dummy payload
 		uint16_t hum = humidity; // Dummy humidity
-		int16_t temp = temperature; // Dummy temp
+		uint16_t temp = temperature; // Dummy temp
 		uint16_t co2_ppm = ppm; // Dummy CO2
 		
-		printf("Data sent %f - %f - %f", humidity, temperature, ppm);
+		printf("Data sent %d - %d - %d", humidity, temperature, ppm);
 
 		_uplink_payload.bytes[0] = hum >> 8;
 		_uplink_payload.bytes[1] = hum & 0xFF;

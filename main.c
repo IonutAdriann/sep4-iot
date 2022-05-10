@@ -12,9 +12,9 @@
 
 
 //define sensor data
-float temperature = 0.0;
-float humidity = 0.0;
-float ppm = 0.0;
+uint16_t temperature = 0.0;
+uint16_t humidity = 0.0;
+uint16_t ppm = 0.0;
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
@@ -78,7 +78,7 @@ void initialiseSystem()
 	// Set output ports for leds used in the example
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 	
-	TempHum_init();
+	TempHumid_init();
 	
 	Co2_init();
 
