@@ -57,6 +57,18 @@
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterface>JTAG</avrtoolinterface>
     <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -292,10 +304,16 @@
     <Compile Include="Source\headers\data.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\headers\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\headers\tempHumid.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\tasks\co2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\servo.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\tasks\tempHumid.c">

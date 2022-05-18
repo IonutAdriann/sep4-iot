@@ -26,6 +26,8 @@ FreeRTOS\src\variantHooks.c
 
 Source\tasks\co2.c
 
+Source\tasks\servo.c
+
 Source\tasks\tempHumid.c
 
 LoRaWANHandler.c

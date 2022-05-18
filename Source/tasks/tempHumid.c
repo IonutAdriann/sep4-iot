@@ -10,8 +10,21 @@
 #include "../headers/tempHumid.h"
 #include "../headers/data.h"
 
+
 TickType_t xLastWakeTime;
 TickType_t xFrequency;
+
+void TempHumid_init()
+{
+	if (HIH8120_OK == hih8120_initialise())
+	{
+		//The driver is initialized.
+	}
+	else
+	{
+		printf("The driver didn't start");
+	}
+}
 
 void TempHumid_taskRun(void)
 {
@@ -20,30 +33,30 @@ void TempHumid_taskRun(void)
 	if (HIH8120_OK != hih8120_wakeup())
 	{
 		vTaskDelay(pdMS_TO_TICKS(100));
-		printf("Temperature&humidity sensor didn't wake up retrying");
+		printf("Temperature&humidity sensor didn't wake up retrying");	
 		while (HIH8120_OK != hih8120_wakeup())
 		{
 			vTaskDelay(pdMS_TO_TICKS(100));
 		}
 	}
 	
+	if ( HIH8120_OK !=  hih8120_measure())
+	{
+		vTaskDelay(pdMS_TO_TICKS(100));
+		///printf("Temperature&humidity sensor could not perform measurement ");
+		while (HIH8120_OK !=  hih8120_measure())
+		{
+			vTaskDelay(pdMS_TO_TICKS(100));
+			
+		}
+	}
+	
 	vTaskDelay(pdMS_TO_TICKS(500));
 	
 	temperature = hih8120_getTemperature();
-	humidity = hih8120_getHumidity();
+	humidity = hih8120_getHumidity();	
 }
 
-void TempHumid_init()
-{
-	if (HIH8120_OK == hih8120_initialise())
-	{
-		//The driver is initialised.
-	}
-	else
-	{
-		printf("The driver didn't start");
-	}
-}
 
 void TempHumid_getDataFromSensorTask(void *pvParameters)
 {

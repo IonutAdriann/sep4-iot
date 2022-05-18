@@ -9,12 +9,19 @@
 #include <status_leds.h>
 #include "../Source/headers/tempHumid.h"
 #include "../Source/headers/co2.h"
+#include "../Source/headers/servo.h"
 
 
 //define sensor data
-uint16_t temperature = 0.0;
-uint16_t humidity = 0.0;
-uint16_t ppm = 0.0;
+uint16_t temperature = 0;
+uint16_t humidity = 0;
+uint16_t ppm = 0;
+
+//define servo threshold
+
+uint16_t minHumidity = 100;
+
+
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
@@ -52,6 +59,14 @@ void create_tasks_and_semaphores(void)
 	,  NULL
 	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
+	
+	xTaskCreate(
+	servo_TurnTask
+	,  "servo_TurnTask"  // A name just for humans
+	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	,  NULL
+	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  NULL );
 }
 
 
@@ -81,6 +96,8 @@ void initialiseSystem()
 	TempHumid_init();
 	
 	Co2_init();
+	
+	servo_Init();
 
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);

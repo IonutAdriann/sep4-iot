@@ -131,19 +131,20 @@ void lora_handler_task( void *pvParameters )
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
+		/*
 		// Some dummy payload
 		uint16_t hum = humidity; // Dummy humidity
 		uint16_t temp = temperature; // Dummy temp
 		uint16_t co2_ppm = ppm; // Dummy CO2
-		
-		printf("Data sent %d - %d - %d", humidity, temperature, ppm);
+		*/
+		printf("Data sent %u - %u - %d", humidity, temperature, ppm);
 
-		_uplink_payload.bytes[0] = hum >> 8;
-		_uplink_payload.bytes[1] = hum & 0xFF;
-		_uplink_payload.bytes[2] = temp >> 8;
-		_uplink_payload.bytes[3] = temp & 0xFF;
-		_uplink_payload.bytes[4] = co2_ppm >> 8;
-		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
+		_uplink_payload.bytes[0] = humidity >> 8;
+		_uplink_payload.bytes[1] = humidity & 0xFF;
+		_uplink_payload.bytes[2] = temperature >> 8;
+		_uplink_payload.bytes[3] = temperature & 0xFF;
+		_uplink_payload.bytes[4] = ppm >> 8;
+		_uplink_payload.bytes[5] = ppm & 0xFF;
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));

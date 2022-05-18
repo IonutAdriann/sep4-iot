@@ -13,4 +13,6 @@ extern uint16_t temperature;
 extern uint16_t humidity;
 extern uint16_t ppm;
 
+extern uint16_t minHumidity;
+
 #endif
