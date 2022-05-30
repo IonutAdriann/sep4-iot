@@ -6,9 +6,14 @@
  */ 
 #pragma once
 
-#include "ATMEGA_FreeRTOS.h"
+#include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <rc_servo.h>
+#include <task.h>
+#include "../Source/headers/Organization.h"
+#include "../Source/headers/Initializers.h"
 
-void servo_TaskRun(void);
+void servo_TaskRun();
 void servo_TurnTask(void *pvParameters);
-void servo_Init();
+//void servo_Init();

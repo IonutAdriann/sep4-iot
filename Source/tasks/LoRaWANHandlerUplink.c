@@ -4,25 +4,22 @@
 * Created: 12/04/2019 10:09:05
 *  Author: IHA
 */
-#include <stddef.h>
-#include <stdio.h>
+#include "../Source/headers/LoRaWANHandlerUplink.h"
+//#include "../Source/headers/data.h"
 
-
-#include <ATMEGA_FreeRTOS.h>
-
-#include <lora_driver.h>
-#include <status_leds.h>
-#include "../Source/headers/data.h"
-
-// Parameters for OTAA join - You have got these in a mail from IHA
+// keys used by the network - provided by ERL  
 #define LORA_appEUI "1AB7F2972CC78C9A"
 #define LORA_appKEY "6C7EF7F5BC5266D1FAEE88AF7EA9BABD"
 
-void lora_handler_task( void *pvParameters );
 
-static lora_driver_payload_t _uplink_payload;
+lora_driver_payload_t payload;
 
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
+//void lora_handler_task( void *pvParameters );
+
+//static lora_driver_payload_t _uplink_payload;
+
+
+/*void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
 	xTaskCreate(
 	lora_handler_task
@@ -31,12 +28,14 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 	,  NULL
 	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
-}
+}*/
 
 static void _lora_setup(void)
 {
 	char _out_buf[20];
+	
 	lora_driver_returnCode_t rc;
+	
 	status_leds_slowBlink(led_ST2); // OPTIONAL: Led the green led blink slowly while we are setting up LoRa
 
 	// Factory reset the transceiver
@@ -47,6 +46,7 @@ static void _lora_setup(void)
 
 	// Get the transceivers HW EUI
 	rc = lora_driver_getRn2483Hweui(_out_buf);
+	
 	printf("Get HWEUI >%s<: %s\n",lora_driver_mapReturnCodeToText(rc), _out_buf);
 
 	// Set the HWEUI as DevEUI in the LoRaWAN software stack in the transceiver
@@ -69,6 +69,7 @@ static void _lora_setup(void)
 	
 	do {
 		rc = lora_driver_join(LORA_OTAA);
+				
 		printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_mapReturnCodeToText(rc));
 
 		if ( rc != LORA_ACCEPTED)
@@ -107,7 +108,7 @@ static void _lora_setup(void)
 }
 
 /*-----------------------------------------------------------*/
-void lora_handler_task( void *pvParameters )
+void lora_handler_uplink_task( void *pvParameters )
 {
 	// Hardware reset of LoRaWAN transceiver
 	lora_driver_resetRn2483(1);
@@ -120,33 +121,37 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	_uplink_payload.len = 6;
-	_uplink_payload.portNo = 2;
+	//_uplink_payload.len = 6;
+	//_uplink_payload.portNo = 2;
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(30000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(3000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
 	for(;;)
 	{
+		
+		EventBits_t temp;
+	
+		temp=xMessageBufferReceive(uplinkMessageBuffer,(void*)&payload,sizeof(payload),portMAX_DELAY);
+	
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-
-		/*
-		// Some dummy payload
-		uint16_t hum = humidity; // Dummy humidity
-		uint16_t temp = temperature; // Dummy temp
-		uint16_t co2_ppm = ppm; // Dummy CO2
-		*/
-		printf("Data sent %u - %u - %d", humidity, temperature, ppm);
-
-		_uplink_payload.bytes[0] = humidity >> 8;
-		_uplink_payload.bytes[1] = humidity & 0xFF;
-		_uplink_payload.bytes[2] = temperature >> 8;
-		_uplink_payload.bytes[3] = temperature & 0xFF;
-		_uplink_payload.bytes[4] = ppm >> 8;
-		_uplink_payload.bytes[5] = ppm & 0xFF;
-
-		status_leds_shortPuls(led_ST4);  // OPTIONAL
-		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		
+		if( temp > 0 )
+		{
+			status_leds_shortPuls(led_ST4);  // OPTIONAL
+			printf("Uploaded Message ------------------>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &payload)));
+		}
+		vTaskDelay(100); // verificatr 
 	}
+}
+void lora_uplink_handler_create(UBaseType_t lora_handler_task_priority)
+{
+	xTaskCreate(
+	lora_handler_uplink_task,
+	"LRHandUplink"  // A name just for humans
+	, configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	, NULL
+	, tskIDLE_PRIORITY + lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	, NULL );
 }

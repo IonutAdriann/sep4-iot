@@ -4,7 +4,7 @@
  * Created: 5/5/2022 1:13:58 PM
  *  Author: alexandru, ionut, dragos
 */
-#include <semphr.h>
+/*#include <semphr.h>
 
 #ifndef data_h
 #define data_h
@@ -15,4 +15,4 @@ extern uint16_t ppm;
 
 extern uint16_t minHumidity;
 
-#endif
+#endif*/

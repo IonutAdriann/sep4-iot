@@ -6,10 +6,19 @@
  */ 
 #pragma once
 
-#include "ATMEGA_FreeRTOS.h"
+#include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <hih8120.h>
+#include <task.h>
+#include <semphr.h>
 
-void TempHumid_taskRun(void);
+#include "../Source/headers/Initializers.h"
+
+void TempHumid_measureTask();
 void TempHumid_getDataFromSensorTask(void *pvParameters);
+void createTempHumidTask(UBaseType_t priority);
 void TempHumid_init();
+uint16_t get_temperature_data();
+uint16_t get_humidity_data();
 

@@ -1,5 +1,7 @@
-Source/tasks/co2.d Source/tasks/co2.o: ../Source/tasks/co2.c \
- ../drivers/../Source/headers/co2.h ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
+Source/tasks/Organization.d Source/tasks/Organization.o: \
+ ../Source/tasks/Organization.c \
+ ../drivers/../Source/headers/Organization.h \
+ ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
@@ -18,18 +20,9 @@ Source/tasks/co2.d Source/tasks/co2.o: ../Source/tasks/co2.c \
  ../FreeRTOS/src/FreeRTOSVariant.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
- ../FreeRTOS/src/list.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- ../drivers/mh_z19.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- ../drivers/serial.h ../FreeRTOS/src/event_groups.h \
- ../FreeRTOS/src/timers.h ../drivers/../Source/headers/Initializers.h \
- ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
- ../FreeRTOS/src/queue.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- ../drivers/../drivers/lora_driver.h
+ ../FreeRTOS/src/list.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
-../drivers/../Source/headers/co2.h:
+../drivers/../Source/headers/Organization.h:
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
 
@@ -77,30 +70,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../FreeRTOS/src/list.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
-
-../drivers/mh_z19.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
-
-../drivers/serial.h:
-
-../FreeRTOS/src/event_groups.h:
-
-../FreeRTOS/src/timers.h:
-
-../drivers/../Source/headers/Initializers.h:
-
-../FreeRTOS/src/message_buffer.h:
-
-../FreeRTOS/src/stream_buffer.h:
-
-../FreeRTOS/src/queue.h:
-
 ../FreeRTOS/src/semphr.h:
 
 ../FreeRTOS/src/queue.h:
-
-../drivers/../drivers/lora_driver.h:

@@ -41,7 +41,7 @@
       </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
-    <avrtoolserialnumber>J42700025513</avrtoolserialnumber>
+    <avrtoolserialnumber>J42700025520</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9801</avrdeviceexpectedsignature>
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
@@ -52,7 +52,7 @@
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
-      <ToolNumber>J42700025513</ToolNumber>
+      <ToolNumber>J42700025520</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterface>JTAG</avrtoolinterface>
@@ -298,19 +298,55 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\headers\Application.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\headers\co2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\headers\Initializers.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\headers\data.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\headers\LoRaWANDownlinkHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\headers\LoRaWANHandlerUplink.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\headers\SensorDataSharePackage.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\headers\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\headers\Organization.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\headers\tempHumid.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\tasks\Application.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\tasks\co2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\Initializers.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\LoRaWANDownlinkHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\LoRaWANHandlerUplink.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\Organization.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\tasks\SensorDataSharePackage.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\tasks\servo.c">
@@ -378,9 +414,6 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

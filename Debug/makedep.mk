@@ -24,13 +24,23 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
+Source\tasks\Application.c
+
 Source\tasks\co2.c
+
+Source\tasks\Initializers.c
+
+Source\tasks\LoRaWANDownlinkHandler.c
+
+Source\tasks\LoRaWANHandlerUplink.c
+
+Source\tasks\Organization.c
+
+Source\tasks\SensorDataSharePackage.c
 
 Source\tasks\servo.c
 
 Source\tasks\tempHumid.c
-
-LoRaWANHandler.c
 
 main.c
 
