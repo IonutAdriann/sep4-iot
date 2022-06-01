@@ -8,10 +8,11 @@
 
 #include <ATMEGA_FreeRTOS.h>
 #include <event_groups.h>
-#include <message_buffer.h>
+#include "message_buffer.h"
 #include <queue.h>
-#include <semphr.h>
 #include "../drivers/lora_driver.h"
+#include "event_groups.h"
+#include "semphr.h"
 
 
 #define temperature_and_humidity_bit (1 << 0)
@@ -21,13 +22,11 @@
  EventGroupHandle_t dataConfigurationGroup; 
  EventGroupHandle_t measureEventGroup;
  MessageBufferHandle_t downlinkMessageBuffer;
-  MessageBufferHandle_t uplinkMessageBuffer;
- QueueHandle_t dataSensorQueue;
+ MessageBufferHandle_t uplinkMessageBuffer;
  SemaphoreHandle_t temperatureAndHumiditySemaphore;
- SemaphoreHandle_t servoSemaphore;
+ SemaphoreHandle_t mutex;
 
 void initializeDownlinkMessageBuffer();
 void initializeEventGroup();
-void initializeQueue();
 void initializeTemperatureAndHumiditySemaphore();
-void initializeServoSemaphore();
+void initialize_mutex();

@@ -17,4 +17,7 @@
 
 void applicationTaskRun(UBaseType_t priority);
 void applicationTask(void *pvParameters);
+uint16_t get_humidity_data();
+uint16_t get_temperature_data();
+uint16_t get_co2_data();
 

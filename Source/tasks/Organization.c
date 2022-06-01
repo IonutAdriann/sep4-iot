@@ -6,31 +6,27 @@
  */ 
 
 #include "../Source/headers/Organization.h"
+#include "../Source/headers/Initializers.h"
 
-SemaphoreHandle_t organizeSemaphore;
-uint8_t servoLevel;
+uint16_t hum_data;
+extern SemaphoreHandle_t mutex;
 
-void Organization_init() {
-	
-	servoLevel = -100;
-	organizeSemaphore = xSemaphoreCreateBinary();
-	xSemaphoreGive(organizeSemaphore);
-}
 
-void setServoLevel(uint8_t level) {
-	
-	if(xSemaphoreTake(organizeSemaphore, portMAX_DELAY) == pdTRUE) {
-		
-		servoLevel = level;
-		xSemaphoreGive(organizeSemaphore);
-	}
-}
-
-uint8_t getServoLevel() {
-	if(xSemaphoreTake(organizeSemaphore, portMAX_DELAY) == pdTRUE)
+void organization_set_min_humidity(uint16_t min_humidity_data) {
+	printf("set here");
+	hum_data=1;
+	if (xSemaphoreTake(mutex, pdMS_TO_TICKS(200)) == pdTRUE)
 	{
-		xSemaphoreGive(organizeSemaphore);
-		
+		printf("set inside");
+		hum_data = min_humidity_data;
+		xSemaphoreGive(mutex);
 	}
-	return servoLevel;
+	printf("HAHHAHAHAHAHAHAH");
 }
+
+uint16_t organization_get_min_humidity() {
+	 // the value is used to determine if the iot can get the hum from the gateway app
+	return hum_data;
+}
+
+

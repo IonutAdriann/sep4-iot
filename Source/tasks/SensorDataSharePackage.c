@@ -34,9 +34,9 @@ void SensorDataSharePackage_setServo(uint8_t servo_state) {
 lora_driver_payload_t SensorDataSharePackage_getLoraPayload(uint8_t port_No) {
 	
 	
-		printf( " Temperature ---> %i",temperature_value);
+		printf( "Temperature ---> %i",temperature_value);
 		printf("Humidity ---> %i",humidity_value);
-		printf(" CO2 ---> %i",co2_value);
+		printf("CO2 ---> %i",co2_value);
 		
 		uplink_payload.portNo = port_No;
 		uplink_payload.len = 6;
@@ -49,10 +49,7 @@ lora_driver_payload_t SensorDataSharePackage_getLoraPayload(uint8_t port_No) {
 		
 		uplink_payload.bytes[4] =(uint8_t) (co2_value >> 8);
 		uplink_payload.bytes[5] =(uint8_t) (co2_value & 0xFF);
-		
-		uint16_t temp=(uplink_payload.bytes[4] <<8)+ uplink_payload.bytes[5];
-		printf("ALEO BLEADI %i",temp);
-		
+
 	
 	return uplink_payload;
 }

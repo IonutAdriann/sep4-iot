@@ -35,7 +35,7 @@
 
 //uint16_t minHumidity = 100;
 
-
+extern MessageBufferHandle_t downlinkMessageBuffer;
 
 // define semaphore handle
 //SemaphoreHandle_t xTestSemaphore;
@@ -46,12 +46,9 @@
 void taskInitializeData()
 {
 	initializeTemperatureAndHumiditySemaphore();
-	initializeServoSemaphore();
-	initializeQueue();
 	initializeEventGroup();
-	Organization_init();
 	initializeDownlinkMessageBuffer();
-	
+	initialize_mutex();
 	lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
 }
 
@@ -60,10 +57,10 @@ void create_tasks(void)
 {
 	createTempHumidTask(1);
 	createCo2Task(1);
-	applicationTaskRun(2);
+	applicationTaskRun(3);
 	lora_uplink_handler_create(4);
-	lora_downlink_handler_create(3);
-	servo_TaskRun(3);
+	lora_downlink_handler_create(5);
+	servo_TaskRun(2);
 }
 
 

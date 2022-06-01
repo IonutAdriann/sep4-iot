@@ -13,7 +13,8 @@
 #include <task.h>
 #include "../Source/headers/Organization.h"
 #include "../Source/headers/Initializers.h"
+#include "../Source/headers/tempHumid.h"
 
 void servo_TaskRun();
 void servo_TurnTask(void *pvParameters);
-//void servo_Init();
+//void servo_Task();

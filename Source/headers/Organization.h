@@ -11,10 +11,7 @@
 #include <stdint.h>
 #include <semphr.h>
 
-extern SemaphoreHandle_t organizeSemaphore;
-extern uint8_t servoLevel;
 
-void Organization_init();
-void setServoLevel(uint8_t level);
-uint8_t getServoLevel();
+void organization_set_min_humidity();
+uint16_t organization_get_min_humidity();
 

@@ -28,7 +28,8 @@ Source/tasks/servo.d Source/tasks/servo.o: ../Source/tasks/servo.c \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
  ../FreeRTOS/src/queue.h ../drivers/../drivers/lora_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- ../drivers/serial.h
+ ../drivers/serial.h ../drivers/../Source/headers/tempHumid.h \
+ ../drivers/hih8120.h
 
 ../Source/tasks/../Headers/servo.h:
 
@@ -109,3 +110,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 ../drivers/serial.h:
+
+../drivers/../Source/headers/tempHumid.h:
+
+../drivers/hih8120.h:

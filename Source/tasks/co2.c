@@ -6,13 +6,12 @@
  */
  
  #include "../Source/headers/co2.h"
- //#include "../Source/headers/data.h"
+ 
  
 
 mh_z19_returnCode_t rc;
 
- //TickType_t xLastWakeTime;
- //TickType_t xFrequency;
+ 
  uint16_t co2_data;
  
  void Co2_init() {
@@ -28,18 +27,28 @@ mh_z19_returnCode_t rc;
 	if (rc != MHZ19_OK)
 	{
 		printf("das ist kaput, scheisse");
-	}	
+	}
+	printf("CO2 Task set  ");	
  }
+ 
+ void createCo2Task( UBaseType_t priority) {
+	Co2_init();
+	xTaskCreate(
+	Co2_getDataFromSensorTask
+	, "Get data from Sensor task "
+	, configMINIMAL_STACK_SIZE
+	,  NULL
+	, priority
+	,NULL
+	);
+}
  
  void Co2_getDataFromSensorTask() {
 	 
 	 while (1) {
-		
 		 EventBits_t sensorDataBits = xEventGroupWaitBits(measureEventGroup,co2_bit,pdTRUE,pdTRUE,portMAX_DELAY);
-		 
 		 if ((sensorDataBits & co2_bit) == co2_bit) 
 			 Co2_measureTask();
-			 
 			 vTaskDelay(pdMS_TO_TICKS(50));
 	 }
  }
@@ -49,21 +58,11 @@ mh_z19_returnCode_t rc;
  }
 
 void myCo2CallBack(uint16_t* ppm) {
-	//xQueueSend(dataSensorQueue , &ppm, portMAX_DELAY);
+	
 	co2_data = ppm;
-	printf("CO2 Ionut --> %i",co2_data);
+	printf("CO2:  %i",co2_data);
 	xEventGroupSetBits(dataConfigurationGroup, co2_bit);
 	
 }
 
-void createCo2Task( UBaseType_t priority) {
-	Co2_init();
-	xTaskCreate(
-	Co2_getDataFromSensorTask
-	, "Get data from Sensor task "
-	, configMINIMAL_STACK_SIZE
-	,  NULL
-	, tskIDLE_PRIORITY + priority
-	,NULL
-	);
-}
+

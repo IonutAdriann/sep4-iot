@@ -35,7 +35,7 @@ main.d main.o: .././main.c \
  ../drivers/../Source/headers/SensorDataSharePackage.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  ../drivers/../Source/headers/LoRaWANDownlinkHandler.h \
- ../drivers/../Source/headers/Application.h
+ ../FreeRTOS/src/portmacro.h ../drivers/../Source/headers/Application.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -138,5 +138,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
 ../drivers/../Source/headers/LoRaWANDownlinkHandler.h:
+
+../FreeRTOS/src/portmacro.h:
 
 ../drivers/../Source/headers/Application.h:

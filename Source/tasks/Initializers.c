@@ -12,13 +12,8 @@ void initializeTemperatureAndHumiditySemaphore() {
 	xSemaphoreGive(temperatureAndHumiditySemaphore);
 }
 
-void initializeServoSemaphore() {
-	servoSemaphore = xSemaphoreCreateBinary();
-	xSemaphoreGive(servoSemaphore);
-}
-
-void initializeQueue() {
-	dataSensorQueue = xQueueCreate(3, sizeof(uint16_t));
+void initialize_mutex() {
+	mutex = xSemaphoreCreateMutex();
 }
 
 void initializeEventGroup() {

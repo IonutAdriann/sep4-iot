@@ -16,16 +16,10 @@ void applicationTask(void *pvParameters)
 {
 	for (;;)
 	{
-		
 		xEventGroupSetBits(measureEventGroup,co2_bit | temperature_and_humidity_bit);
-		
-
 		EventBits_t eventBits = xEventGroupWaitBits(dataConfigurationGroup,temperature_and_humidity_bit|co2_bit, pdTRUE, pdTRUE,portMAX_DELAY);
-	
-		
 		if((eventBits &(co2_bit | temperature_and_humidity_bit))==(co2_bit | temperature_and_humidity_bit)) 
 		{
-			
 			SensorDataSharePackage_setCo2_value(get_co2_data());
 			SensorDataSharePackage_setTemperature_value(get_temperature_data());
 			SensorDataSharePackage_setHumidity_value(get_humidity_data());

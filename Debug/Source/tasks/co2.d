@@ -26,8 +26,8 @@ Source/tasks/co2.d Source/tasks/co2.o: ../Source/tasks/co2.c \
  ../drivers/serial.h ../FreeRTOS/src/event_groups.h \
  ../FreeRTOS/src/timers.h ../drivers/../Source/headers/Initializers.h \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
- ../FreeRTOS/src/queue.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- ../drivers/../drivers/lora_driver.h
+ ../FreeRTOS/src/queue.h ../drivers/../drivers/lora_driver.h \
+ ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
 ../drivers/../Source/headers/co2.h:
 
@@ -99,8 +99,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../FreeRTOS/src/queue.h:
 
+../drivers/../drivers/lora_driver.h:
+
 ../FreeRTOS/src/semphr.h:
 
 ../FreeRTOS/src/queue.h:
-
-../drivers/../drivers/lora_driver.h:

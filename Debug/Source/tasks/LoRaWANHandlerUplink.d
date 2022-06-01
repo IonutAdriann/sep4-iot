@@ -30,8 +30,8 @@ Source/tasks/LoRaWANHandlerUplink.d Source/tasks/LoRaWANHandlerUplink.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  ../drivers/../Source/headers/Initializers.h \
  ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
- ../FreeRTOS/src/queue.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- ../drivers/../drivers/lora_driver.h
+ ../FreeRTOS/src/queue.h ../drivers/../drivers/lora_driver.h \
+ ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
 ../drivers/../Source/headers/LoRaWANHandlerUplink.h:
 
@@ -111,8 +111,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../FreeRTOS/src/queue.h:
 
+../drivers/../drivers/lora_driver.h:
+
 ../FreeRTOS/src/semphr.h:
 
 ../FreeRTOS/src/queue.h:
-
-../drivers/../drivers/lora_driver.h:
