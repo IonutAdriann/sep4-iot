@@ -26,22 +26,8 @@
 #include "../Source/headers/Organization.h"
 
 
-//define sensor data
-//uint16_t temperature = 0;
-//uint16_t humidity = 0;
-//uint16_t ppm = 0;
-
-//define servo threshold
-
-//uint16_t minHumidity = 100;
-
 extern MessageBufferHandle_t downlinkMessageBuffer;
 
-// define semaphore handle
-//SemaphoreHandle_t xTestSemaphore;
-
-// Prototype for LoRaWAN handler
-//void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
 
 void taskInitializeData()
 {
@@ -76,11 +62,11 @@ void initialiseSystem()
 /*-----------------------------------------------------------*/
 int main(void)
 {
-	initialiseSystem(); // Must be done as the very first thing!!
+	initialiseSystem(); 
 	printf("Program Started!!\n");
-	vTaskStartScheduler(); // Initialize and run the freeRTOS scheduler. Execution should never return from here.
+	vTaskStartScheduler(); // Initialize and run the freeRTOS scheduler.
 
-	/* Replace with your application code */
+
 	while (1)
 	{
 		

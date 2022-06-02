@@ -2,7 +2,7 @@
  * servo.h
  *
  * Created: 5/11/2022 3:23:22 PM
- *  Author: alexa
+ *  Author: alexandru, ionut, dragos
  */ 
 #pragma once
 
@@ -17,4 +17,4 @@
 
 void servo_TaskRun();
 void servo_TurnTask(void *pvParameters);
-//void servo_Task();
+

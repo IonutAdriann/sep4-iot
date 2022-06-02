@@ -7,11 +7,11 @@
 
 #include "../headers/tempHumid.h"
 
-
+//define default values for temperature and humidity
 float temperature_data = 0.0;
 uint16_t humidity_data = 0;
 
-
+// task to initialize the drivers
 void TempHumid_init()
 {
 	if (HIH8120_OK == hih8120_initialise())
@@ -20,32 +20,35 @@ void TempHumid_init()
 	}
 	else
 	{	
-		printf("The driver didn't start");
+		printf("The driver didn't start");// The driver didn't initialize.
 	}
 }
 
+// task for the temperature and humidity for the sensor to work
 void TempHumid_measureTask(void)
 {
 	
 	
 	if (HIH8120_OK != hih8120_wakeup())
 	{
-		printf("Temperature&humidity sensor didn't wake up retrying");	
+		printf("Temperature&humidity sensor didn't wake up retrying");	//The sensor didn't wake up
 		
 	}
 	vTaskDelay(pdMS_TO_TICKS(100));
 	
 	if ( HIH8120_OK !=  hih8120_measure())
 	{
-		printf("Temperature&humidity sensor could not perform measurement ");
+		printf("Temperature&humidity sensor could not perform measurement "); //The sensor coudn't perform the measurement 
 		
 	}
 	
 	vTaskDelay(pdMS_TO_TICKS(20));
 	
 }
+
+// create task to perform measurement for the temperature and humidity
 void createTempHumidTask(UBaseType_t priority) {
-	TempHumid_init(); // in main cred
+	TempHumid_init(); 
 	
 	xTaskCreate (
 	TempHumid_getDataFromSensorTask
@@ -72,12 +75,12 @@ void TempHumid_getDataFromSensorTask(void *pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(10));
 	}
 }
-
+// getter for temperature data
 uint16_t get_temperature_data() {
 	
 	return temperature_data;
 }
-
+// getter for humidity data
 uint16_t get_humidity_data() {
 	
 	return humidity_data;

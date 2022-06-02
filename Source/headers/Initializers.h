@@ -1,5 +1,5 @@
 /*
- * configuration.h
+ * Initializers.h
  *
  * Created: 5/29/2022 5:23:10 PM
  *  Author: Ionut / Dragos / Alexandru

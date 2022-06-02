@@ -5,7 +5,7 @@
 *  Author: IHA
 */
 #include "../Source/headers/LoRaWANHandlerUplink.h"
-//#include "../Source/headers/data.h"
+
 
 // keys used by the network - provided by ERL  
 #define LORA_appEUI "1AB7F2972CC78C9A"
@@ -21,7 +21,7 @@ static void _lora_setup(void)
 	
 	lora_driver_returnCode_t rc;
 	
-	status_leds_slowBlink(led_ST2); // OPTIONAL: Led the green led blink slowly while we are setting up LoRa
+	status_leds_slowBlink(led_ST2); //Led the green led blink slowly while we are setting up LoRa
 
 	// Factory reset the transceiver
 	printf("FactoryReset >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_rn2483FactoryReset()));
@@ -60,8 +60,8 @@ static void _lora_setup(void)
 		if ( rc != LORA_ACCEPTED)
 		{
 			// Make the red led pulse to tell something went wrong
-			status_leds_longPuls(led_ST1); // OPTIONAL
-			// Wait 5 sec and lets try again
+			status_leds_longPuls(led_ST1); 
+			// Waits 5 sec and tries again
 			vTaskDelay(pdMS_TO_TICKS(5000UL));
 		}
 		else
@@ -74,17 +74,15 @@ static void _lora_setup(void)
 	{
 		// Connected to LoRaWAN :-)
 		// Make the green led steady
-		status_leds_ledOn(led_ST2); // OPTIONAL
+		status_leds_ledOn(led_ST2);
 	}
 	else
 	{
-		// Something went wrong
-		// Turn off the green led
-		status_leds_ledOff(led_ST2); // OPTIONAL
+		// Something went wrong and turns off the green led
+		status_leds_ledOff(led_ST2);
 		// Make the red led blink fast to tell something went wrong
-		status_leds_fastBlink(led_ST1); // OPTIONAL
+		status_leds_fastBlink(led_ST1);
 
-		// Lets stay here
 		while (1)
 		{
 			taskYIELD();
@@ -99,18 +97,17 @@ void lora_handler_uplink_task( void *pvParameters )
 	lora_driver_resetRn2483(1);
 	vTaskDelay(2);
 	lora_driver_resetRn2483(0);
-	// Give it a chance to wakeup
+	//time to wakeup
 	vTaskDelay(150);
 
 	lora_driver_flushBuffers(); // get rid of first version string from module after reset!
 
 	_lora_setup();
 
-	//_uplink_payload.len = 6;
-	//_uplink_payload.portNo = 2;
+
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(3000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(300000 ms); // Uploads a message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
 	for(;;)
@@ -124,19 +121,20 @@ void lora_handler_uplink_task( void *pvParameters )
 		
 		if( temp > 0 )
 		{
-			status_leds_shortPuls(led_ST4);  // OPTIONAL
+			status_leds_shortPuls(led_ST4); 
 			printf("Uploaded Message ------------------>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &payload)));
 		}
 		vTaskDelay(100);  
 	}
 }
+// create task for the uplink handler 
 void lora_uplink_handler_create(UBaseType_t lora_handler_task_priority)
 {
 	xTaskCreate(
 	lora_handler_uplink_task,
-	"LRHandUplink"  // A name just for humans
-	, configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	"LRHandUplink"  // A name for humans
+	, configMINIMAL_STACK_SIZE  
 	, NULL
-	, lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	, lora_handler_task_priority  // Priority setter.
 	, NULL );
 }

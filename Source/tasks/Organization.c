@@ -21,7 +21,7 @@ void organization_set_min_humidity(uint16_t min_humidity_data) {
 		hum_data = min_humidity_data;
 		xSemaphoreGive(mutex);
 	}
-	printf("HAHHAHAHAHAHAHAH");
+	
 }
 
 uint16_t organization_get_min_humidity() {

@@ -2,7 +2,7 @@
  * Application.h
  *
  * Created: 5/29/2022 3:45:26 PM
- *  Author: Ionut
+ *  Author: Ionut / Dragos/ Alexandru
  */ 
 
 #pragma once

@@ -6,21 +6,21 @@
  */ 
 #include "../Source/headers/Initializers.h"
 
-
+//initialize the temperature and humidity semaphore
 void initializeTemperatureAndHumiditySemaphore() {
 	temperatureAndHumiditySemaphore = xSemaphoreCreateBinary();
 	xSemaphoreGive(temperatureAndHumiditySemaphore);
 }
-
+//initialize the mutex
 void initialize_mutex() {
 	mutex = xSemaphoreCreateMutex();
 }
-
+//initialize the eventGroup
 void initializeEventGroup() {
 	dataConfigurationGroup = xEventGroupCreate();
 	measureEventGroup=xEventGroupCreate();
 }
-
+//initialize the message buffer for the downlink
 void initializeDownlinkMessageBuffer() {
 	
 	uplinkMessageBuffer=xMessageBufferCreate(sizeof(lora_driver_payload_t) * 2);

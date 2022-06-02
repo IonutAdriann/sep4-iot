@@ -30,7 +30,7 @@ void applicationTask(void *pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(50));
 	}
 }
-
+// create task for the application
 void applicationTaskRun(UBaseType_t priority)
 {
 	xTaskCreate(

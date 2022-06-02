@@ -4,12 +4,10 @@
  * Created: 5/11/2022 3:23:11 PM
  *  Author: Alexandru, Dragos, Ionut
  */ 
-
-
 #include "../Headers/servo.h"
 
 
-
+//task for the servo to turn
 void servo_TurnTask(void *pvParameters)
 {	
 
@@ -37,16 +35,16 @@ void servo_TurnTask(void *pvParameters)
 	}
 }
 
-
+// task for the servo to run
 void servo_TaskRun()
 {
 	rc_servo_initialise();
 	
 	xTaskCreate(
 	servo_TurnTask
-	, "Actuator"  // A name just for humans
-	, configMINIMAL_STACK_SIZE // This stack size can be checked & adjusted by reading the Stack Highwater
+	, "Actuator"  // A name for humans
+	, configMINIMAL_STACK_SIZE 
 	, NULL
-	, 3 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	, 3 // Priority setter
 	, NULL );
 }
